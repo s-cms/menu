@@ -7,6 +7,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Flex;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -26,7 +27,7 @@ class MenuForm
     {
         return $schema
             ->components([
-                FormGrid::make()->schema([
+                Grid::make()->schema([
                     LeftGrid::make()->schema([
                         Section::make()->schema([
                             TextInput::make('name'),
@@ -76,13 +77,9 @@ class MenuForm
                                 ]);
                             })->toArray();
                         }),
-                        //     Section::make('Items')->compact()->schema([
+                    ])->columnSpanFull(),
 
-                    ]),
-                    RightGrid::make()->schema([
-                        Aside::make(false),
-                    ])->hiddenOn('create'),
-                ]),
+                ])->columnSpanFull(),
             ]);
     }
 }
