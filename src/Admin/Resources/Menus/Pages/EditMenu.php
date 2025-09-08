@@ -26,6 +26,7 @@ class EditMenu extends EditRecord
                 $additionalItems = array_merge($additionalItems, $component::getNavigationItems());
             }
         }
+
         return array_merge(parent::getSubNavigation(), $additionalItems);
     }
 
