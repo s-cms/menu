@@ -54,8 +54,12 @@ class Menu extends Model
                     } else {
                         $data['url'] = $url;
                     }
+                    $data['is_external'] = $item['open_in_new_tab'] ?? false;
+                    $data['status'] = !!$item['status'];
 
                     return $data;
+                })->filter(function ($item) {
+                    return $item['status'] === true;
                 });
             }
         );
