@@ -18,24 +18,22 @@ class NestedMenuType implements MenuTypeInterface
     {
         return __('menu::admin.nested_menu');
     }
-
     public function getSchema(): Field
     {
-        return Select::make('menu_id')
+        return Select::make('url')
             ->label(__('menu::admin.select_menu'))
-            ->options(Menu::all()->pluck('name', 'id'))
+            ->options(fn(Menu $record) => Menu::query()->where('id', '!=', $record->id)->pluck('name', 'id'))
             ->searchable()
-            ->preload()
             ->required();
     }
 
     public function getLinkFromItem(mixed $item): string | array
     {
-        if (! isset($item['menu_id'])) {
-            return '#';
-        }
+        // if (! isset($item['menu_id'])) {
+        //     return '#';
+        // }
 
-        $nestedMenu = Menu::find($item['menu_id']);
+        $nestedMenu = Menu::find($item['url']);
         if (! $nestedMenu) {
             return '#';
         }
