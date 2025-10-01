@@ -6,7 +6,6 @@ use Filament\Resources\Pages\CreateRecord;
 use SmartCms\Menu\Admin\Resources\Menus\MenuResource;
 use SmartCms\Menu\MenuPlugin;
 use SmartCms\Support\Admin\Components\Actions\SaveAction;
-use SmartCms\Support\Admin\Components\Actions\SaveAndClose;
 
 class CreateMenu extends CreateRecord
 {
