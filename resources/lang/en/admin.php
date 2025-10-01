@@ -8,6 +8,6 @@ return [
     'url' => 'URL',
     'menu' => 'Menu',
     'items_count' => 'Items count',
-    'nested_menu' => 'Nested Menu',
+    'nested_menu' => 'Sub menu',
     'select_menu' => 'Select Menu',
 ];
