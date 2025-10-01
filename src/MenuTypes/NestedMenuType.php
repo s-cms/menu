@@ -18,11 +18,12 @@ class NestedMenuType implements MenuTypeInterface
     {
         return __('menu::admin.nested_menu');
     }
+
     public function getSchema(): Field
     {
         return Select::make('url')
             ->label(__('menu::admin.select_menu'))
-            ->options(fn(Menu $record) => Menu::query()->where('id', '!=', $record->id)->pluck('name', 'id'))
+            ->options(fn (Menu $record) => Menu::query()->where('id', '!=', $record->id)->pluck('name', 'id'))
             ->searchable()
             ->required();
     }

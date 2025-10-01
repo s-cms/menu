@@ -55,7 +55,7 @@ class Menu extends Model
                         $data['url'] = $url;
                     }
                     $data['is_external'] = $item['open_in_new_tab'] ?? false;
-                    $data['status'] = !!$item['status'];
+                    $data['status'] = (bool) $item['status'];
 
                     return $data;
                 })->filter(function ($item) {
