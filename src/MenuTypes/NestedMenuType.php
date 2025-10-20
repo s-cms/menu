@@ -5,6 +5,7 @@ namespace SmartCms\Menu\MenuTypes;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use SmartCms\Menu\MenuTypeInterface;
 use SmartCms\Menu\Models\Menu;
 
@@ -24,8 +25,8 @@ class NestedMenuType implements MenuTypeInterface
     {
         return Select::make('url')
             ->label(__('menu::admin.select_menu'))
-            ->options(fn (?Menu $record) => Menu::query()
-                ->when($record, fn (Builder $query) => $query->where('id', '!=', $record->id))
+            ->options(fn(?Model $record) => Menu::query()
+                ->when($record && $record instanceof Menu, fn(Builder $query) => $query->where('id', '!=', $record->id))
                 ->pluck('name', 'id'))
             ->searchable()
             ->required();
