@@ -25,8 +25,8 @@ class NestedMenuType implements MenuTypeInterface
     {
         return Select::make('url')
             ->label(__('menu::admin.select_menu'))
-            ->options(fn(?Model $record) => Menu::query()
-                ->when($record && $record instanceof Menu, fn(Builder $query) => $query->where('id', '!=', $record->id))
+            ->options(fn (?Model $record) => Menu::query()
+                ->when($record && $record instanceof Menu, fn (Builder $query) => $query->where('id', '!=', $record->id))
                 ->pluck('name', 'id'))
             ->searchable()
             ->required();
