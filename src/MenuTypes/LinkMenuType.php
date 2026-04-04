@@ -18,7 +18,7 @@ class LinkMenuType implements MenuTypeInterface
         return __('menu::admin.link');
     }
 
-    public function getSchema(): Field
+    public function getSchema(?string $language = null): Field
     {
         return TextInput::make('url')->label(__('menu::admin.url'));
     }

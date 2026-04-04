@@ -10,7 +10,7 @@ interface MenuTypeInterface
 
     public function getLabel(): string;
 
-    public function getSchema(): Field;
+    public function getSchema(?string $language = null): Field;
 
     public function getLinkFromItem(mixed $item): string | array;
 }
