@@ -37,7 +37,7 @@ class EditMenu extends EditRecord
                 SaveAction::make($this),
                 SaveAndClose::make($this, ListMenus::getUrl()),
                 DeleteAction::make(),
-            ])->link()->label('Actions')
+            ])->link()->label(__('support::admin.actions'))
                 ->icon(\Filament\Support\Icons\Heroicon::ChevronDown)
                 ->size(\Filament\Support\Enums\Size::Small)
                 ->iconPosition(\Filament\Support\Enums\IconPosition::After)

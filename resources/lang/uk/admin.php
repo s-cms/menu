@@ -10,4 +10,6 @@ return [
     'items_count' => 'Кількість елементів',
     'nested_menu' => 'Підменю',
     'select_menu' => 'Вибрати меню',
+    'items' => 'Елементи меню',
+    'menu_item_title' => 'Назва елемента меню',
 ];

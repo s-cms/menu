@@ -10,4 +10,6 @@ return [
     'items_count' => 'Anzahl der Elemente',
     'nested_menu' => 'Untermenü',
     'select_menu' => 'Menü auswählen',
+    'items' => 'Menüpunkte',
+    'menu_item_title' => 'Titel des Menüpunkts',
 ];

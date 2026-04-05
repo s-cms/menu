@@ -40,13 +40,13 @@ class MenuForm
     {
         return [
             Repeater::make('items.' . $lang->slug)
-                ->label('Menu Items')
+                ->label(__('menu::admin.items'))
                 ->hiddenLabel()
                 ->schema([
                     TextInput::make('title')
-                        ->label('Title')
+                        ->label(__('menu::admin.title'))
                         ->required()
-                        ->placeholder('Menu item title')
+                        ->placeholder(__('menu::admin.menu_item_title'))
                         ->live(),
                     Select::make('type')
                         ->label(__('menu::admin.type'))
