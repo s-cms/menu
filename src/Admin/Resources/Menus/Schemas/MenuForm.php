@@ -47,12 +47,12 @@ class MenuForm
                                                 ->reactive()
                                                 ->default('link')
                                                 ->required(),
-                                            Flex::make(function (Get $get) {
+                                            Flex::make(function (Get $get) use ($lang) {
                                                 $type = $get('type');
                                                 if (! $type) {
                                                     return [];
                                                 }
-                                                $field = app(MenuRegistry::class)->getSchemaByType($type);
+                                                $field = app(MenuRegistry::class)->getSchemaByType($type, $lang->slug);
                                                 if (! $field) {
                                                     return [];
                                                 }
