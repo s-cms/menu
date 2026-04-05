@@ -2,7 +2,11 @@
 
 namespace SmartCms\Menu\Admin\Resources\Menus\Pages;
 
+use Filament\Actions\ActionGroup;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Support\Enums\IconPosition;
+use Filament\Support\Enums\Size;
+use Filament\Support\Icons\Heroicon;
 use SmartCms\Menu\Admin\Resources\Menus\MenuResource;
 use SmartCms\Menu\MenuPlugin;
 use SmartCms\Support\Admin\Components\Actions\SaveAction;
@@ -26,12 +30,12 @@ class CreateMenu extends CreateRecord
     protected function getHeaderActions(): array
     {
         return [
-            \Filament\Actions\ActionGroup::make([
+            ActionGroup::make([
                 SaveAction::make($this),
             ])->link()->label(__('support::admin.actions'))
-                ->icon(\Filament\Support\Icons\Heroicon::ChevronDown)
-                ->size(\Filament\Support\Enums\Size::Small)
-                ->iconPosition(\Filament\Support\Enums\IconPosition::After)
+                ->icon(Heroicon::ChevronDown)
+                ->size(Size::Small)
+                ->iconPosition(IconPosition::After)
                 ->color('primary'),
         ];
     }
