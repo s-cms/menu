@@ -28,6 +28,11 @@ class MenuResource extends Resource
         return __('menu::admin.menu');
     }
 
+    public static function getPluralModelLabel(): string
+    {
+        return __('menu::admin.menus');
+    }
+
     public static function getNavigationGroup(): ?string
     {
         return MenuPlugin::$navigationGroup ? __(MenuPlugin::$navigationGroup) : null;

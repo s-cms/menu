@@ -12,4 +12,5 @@ return [
     'select_menu' => 'Wybierz menu',
     'items' => 'Elementy menu',
     'menu_item_title' => 'Tytuł elementu menu',
+    'menus' => 'Menu',
 ];

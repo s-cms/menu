@@ -27,7 +27,7 @@ class MenuForm
                 Grid::make()->schema([
                     LeftGrid::make()->schema([
                         Section::make()->schema([
-                            TextInput::make('name'),
+                            TextInput::make('name')->label(__('support::admin.name')),
                         ]),
                         ...self::buildMenuLanguageSchema(),
                     ])->columnSpanFull(),
