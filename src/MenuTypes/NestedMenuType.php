@@ -21,7 +21,7 @@ class NestedMenuType implements MenuTypeInterface
         return __('menu::admin.nested_menu');
     }
 
-    public function getSchema(): Field
+    public function getSchema(?string $language = null): Field
     {
         return Select::make('url')
             ->label(__('menu::admin.select_menu'))

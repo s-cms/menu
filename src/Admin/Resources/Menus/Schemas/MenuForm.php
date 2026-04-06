@@ -27,56 +27,78 @@ class MenuForm
                 Grid::make()->schema([
                     LeftGrid::make()->schema([
                         Section::make()->schema([
-                            TextInput::make('name'),
+                            TextInput::make('name')->label(__('support::admin.name')),
                         ]),
-                        Tabs::make()->schema(function (): array {
-                            return app('lang')->adminLanguages()->map(function (Language $lang) {
-                                return Tab::make($lang->name)->schema([
-                                    Repeater::make('items.' . $lang->slug)
-                                        ->label('Menu Items')
-                                        ->hiddenLabel()
-                                        ->schema([
-                                            TextInput::make('title')
-                                                ->label('Title')
-                                                ->required()
-                                                ->placeholder('Menu item title')
-                                                ->live(),
-                                            Select::make('type')
-                                                ->label(__('menu::admin.type'))
-                                                ->options(app(MenuRegistry::class)->all())
-                                                ->reactive()
-                                                ->default('link')
-                                                ->required(),
-                                            Flex::make(function (Get $get) {
-                                                $type = $get('type');
-                                                if (! $type) {
-                                                    return [];
-                                                }
-                                                $field = app(MenuRegistry::class)->getSchemaByType($type);
-                                                if (! $field) {
-                                                    return [];
-                                                }
-
-                                                return [$field];
-                                            }),
-                                            Flex::make([
-                                                StatusField::make('status')->inline(false),
-                                                Toggle::make('open_in_new_tab')
-                                                    ->label(__('menu::admin.open_in_new_tab'))
-                                                    ->inline(false)
-                                                    ->default(false),
-                                            ]),
-                                        ])
-                                        ->columns(2)
-                                        ->defaultItems(0)
-                                        ->reorderableWithButtons()
-                                        ->collapsible(),
-                                ]);
-                            })->toArray();
-                        }),
+                        ...self::buildMenuLanguageSchema(),
                     ])->columnSpanFull(),
 
                 ])->columnSpanFull(),
             ]);
+    }
+
+    protected static function buildMenuItemsForLanguage(Language $lang): array
+    {
+        return [
+            Repeater::make('items.' . $lang->slug)
+                ->label(__('menu::admin.items'))
+                ->hiddenLabel()
+                ->schema([
+                    TextInput::make('title')
+                        ->label(__('menu::admin.title'))
+                        ->required()
+                        ->placeholder(__('menu::admin.menu_item_title'))
+                        ->live(),
+                    Select::make('type')
+                        ->label(__('menu::admin.type'))
+                        ->options(app(MenuRegistry::class)->all())
+                        ->reactive()
+                        ->default('link')
+                        ->required(),
+                    Flex::make(function (Get $get) use ($lang) {
+                        $type = $get('type');
+                        if (! $type) {
+                            return [];
+                        }
+                        $field = app(MenuRegistry::class)->getSchemaByType($type, $lang->slug);
+                        if (! $field) {
+                            return [];
+                        }
+
+                        return [$field];
+                    }),
+                    Flex::make([
+                        StatusField::make('status')->inline(false),
+                        Toggle::make('open_in_new_tab')
+                            ->label(__('menu::admin.open_in_new_tab'))
+                            ->inline(false)
+                            ->default(false),
+                    ]),
+                ])
+                ->columns(2)
+                ->defaultItems(0)
+                ->reorderableWithButtons()
+                ->collapsible(),
+        ];
+    }
+
+    protected static function buildMenuLanguageSchema(): array
+    {
+        $languages = app('lang')->adminLanguages();
+
+        if ($languages->count() <= 1) {
+            $lang = $languages->first();
+
+            return [
+                Section::make()->schema(self::buildMenuItemsForLanguage($lang)),
+            ];
+        }
+
+        return [
+            Tabs::make()->schema(
+                $languages->map(fn (Language $lang) => Tab::make($lang->name)->schema(
+                    self::buildMenuItemsForLanguage($lang)
+                ))->toArray()
+            ),
+        ];
     }
 }

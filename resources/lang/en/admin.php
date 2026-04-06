@@ -10,4 +10,7 @@ return [
     'items_count' => 'Items count',
     'nested_menu' => 'Sub menu',
     'select_menu' => 'Select Menu',
+    'items' => 'Menu Items',
+    'menu_item_title' => 'Menu item title',
+    'menus' => 'Menus',
 ];

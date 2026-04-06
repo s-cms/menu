@@ -2,8 +2,12 @@
 
 namespace SmartCms\Menu\Admin\Resources\Menus\Pages;
 
+use Filament\Actions\ActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Enums\IconPosition;
+use Filament\Support\Enums\Size;
+use Filament\Support\Icons\Heroicon;
 use SmartCms\Menu\Admin\Resources\Menus\MenuResource;
 use SmartCms\Menu\MenuPlugin;
 use SmartCms\Support\Admin\Components\Actions\SaveAction;
@@ -33,14 +37,14 @@ class EditMenu extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            \Filament\Actions\ActionGroup::make([
+            ActionGroup::make([
                 SaveAction::make($this),
                 SaveAndClose::make($this, ListMenus::getUrl()),
                 DeleteAction::make(),
-            ])->link()->label('Actions')
-                ->icon(\Filament\Support\Icons\Heroicon::ChevronDown)
-                ->size(\Filament\Support\Enums\Size::Small)
-                ->iconPosition(\Filament\Support\Enums\IconPosition::After)
+            ])->link()->label(__('support::admin.actions'))
+                ->icon(Heroicon::ChevronDown)
+                ->size(Size::Small)
+                ->iconPosition(IconPosition::After)
                 ->color('primary'),
         ];
     }

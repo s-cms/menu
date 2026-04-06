@@ -39,9 +39,9 @@ class MenuRegistry
         return collect($this->menus)->mapWithKeys(fn (string $class) => [(new $class)->getType() => (new $class)->getLabel()])->toArray();
     }
 
-    public function getSchemaByType(string $type): ?Field
+    public function getSchemaByType(string $type, ?string $language = null): ?Field
     {
-        $schema = $this->get($type)?->getSchema();
+        $schema = $this->get($type)?->getSchema($language);
         if (! $schema) {
             return null;
         }
